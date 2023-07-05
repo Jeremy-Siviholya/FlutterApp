@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/RegistrationPage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,12 +12,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    print("State page");
   }
 
   dispose() {
     super.dispose();
-    print("Exit page");
   }
 
   bool view = true;
@@ -49,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
+          const SizedBox(height: 50,),
           Container(
             child: Form(
                 child: Column(
@@ -58,8 +58,12 @@ class _LoginPageState extends State<LoginPage> {
                         horizontal: large < 900 ? 40 : large / 4),
                     child: TextFormField(
                       decoration:
-                          InputDecoration(label: Text('Enter your email')),
+                         const InputDecoration(label: Text('Enter your email'),
+                         border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                         hintText: 'your email'
+                         ),
                     )),
+                   const SizedBox(height: 20,),
                 Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: large < 900 ? 40 : large / 4),
@@ -67,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                       obscureText: view,
                       decoration: InputDecoration(
                           label: const Text('Enter your password'),
+                          border:const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                           suffix: IconButton(
                               onPressed: () => {
                                     setState(() {
@@ -77,6 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ? const Icon(Icons.visibility_off)
                                   : const Icon(Icons.visibility))),
                     )),
+                    const SizedBox(height: 70,),
                     Padding(
                      padding: EdgeInsets.symmetric(
                       
@@ -86,7 +92,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                       
                       ElevatedButton.icon(onPressed: ()=>{}, icon: Icon(Icons.login_sharp), label: Text('connexion')),
-                      ElevatedButton.icon(onPressed: ()=>{}, icon: Icon(Icons.app_registration), label: Text('Registration'))
+                      ElevatedButton.icon(onPressed: ()=>{
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>RegistrationPage(),))
+                      }, icon:const Icon(Icons.app_registration), label:const Text('Registration'))
                       ],),
                     )
               
