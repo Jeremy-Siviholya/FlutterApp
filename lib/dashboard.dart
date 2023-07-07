@@ -74,10 +74,11 @@ class _dashboardState extends State<dashboard> {
         itemCount: products.length,
         gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
          itemBuilder: (context,index){
-          final iscard=listaddcard.contains(products[index].id);
+          final iscard=listaddcard.contains(products[index]);
         return Card(
           child:Column(children: [
-            Expanded(child:Image(image: NetworkImage('${products[index].image}')) ,),
+            Expanded(child:Image(image: NetworkImage('${products[index].image}')),
+            ),
             Column(children: [
               Text('${products[index].title}',
                overflow: TextOverflow.ellipsis,
@@ -107,7 +108,7 @@ class _dashboardState extends State<dashboard> {
       }),
       floatingActionButton: FloatingActionButton(onPressed: (){}, child: Stack(
         children: [
-          Positioned(
+          const Positioned(
             top: 25,
             right:10,
             child:
