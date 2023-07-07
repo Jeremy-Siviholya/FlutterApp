@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/RegistrationPage.dart';
+import 'package:flutter_application_1/dashboard.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,6 +25,24 @@ class _LoginPageState extends State<LoginPage> {
       "email":emailControler.text,
       "password":passwordControler.text
     };
+    if(emailControler.text=="jeremyjs@gmail.com"){
+      if(passwordControler.text=='jeremy@2021')
+      {
+        setState(() {
+           Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const dashboard()),
+              (route) => false);
+        });
+      }
+      else{
+        setState(() {
+          print('Echec');
+        // SnackBarAction(label: 'Echec', onPressed: (){});
+        });
+      }
+    }
+ 
     print(data);
   }
 
@@ -84,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                         {
                           return 'entrez au moins 8 caractere';
                         }
+                        
                         return null;
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -135,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                         if(globalKey.currentState!.validate()){
                         login();
                         }
-                        }, icon: Icon(Icons.login_sharp), label: Text('connexion')),
+                        }, icon:const Icon(Icons.login_sharp), label: Text('connexion')),
                       ElevatedButton.icon(onPressed: ()=>{
                         Navigator.push(context,MaterialPageRoute(builder: (context)=>RegistrationPage(),))
                       }, icon:const Icon(Icons.app_registration), label:const Text('Registration'))
