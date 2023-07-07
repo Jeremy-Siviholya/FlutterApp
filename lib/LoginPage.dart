@@ -18,7 +18,20 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  login(){
+    // print(emailControler);
+    Map data={
+      "email":emailControler.text,
+      "password":passwordControler.text
+    };
+    print(data);
+  }
+
+
   bool view = true;
+  TextEditingController emailControler=TextEditingController();
+  TextEditingController passwordControler = TextEditingController();
+  final globalKey=GlobalKey<FormState>();
 
   Widget build(BuildContext context) {
     final large = MediaQuery.of(context).size.width;
@@ -37,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.adobe_rounded,
+                  Icons.window,
                   size: 40,
                   color: Colors.white,
                 ),
@@ -51,12 +64,29 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 50,),
           Container(
             child: Form(
+              key: globalKey,
                 child: Column(
               children: [
                 Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: large < 900 ? 40 : large / 4),
                     child: TextFormField(
+                      controller: emailControler,
+                      validator: (value) {
+                        if(value!.isEmpty){
+                          return 'etrer votre email';
+                        }
+                        if(!value.contains("@"))
+                        {
+                          return 'votre email est incorrect';
+                        }
+                        if(value.length<8)
+                        {
+                          return 'entrez au moins 8 caractere';
+                        }
+                        return null;
+                      },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration:
                          const InputDecoration(label: Text('Enter your email'),
                          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -68,6 +98,16 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.symmetric(
                         horizontal: large < 900 ? 40 : large / 4),
                     child: TextFormField(
+                        validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'etrer votre password';
+                            }
+                            if (value.length < 8) {
+                              return 'entrez au moins 8 caractere';
+                            }
+                            return null;
+                          },
+                      controller: passwordControler,
                       obscureText: view,
                       decoration: InputDecoration(
                           label: const Text('Enter your password'),
@@ -91,7 +131,11 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                       
-                      ElevatedButton.icon(onPressed: ()=>{}, icon: Icon(Icons.login_sharp), label: Text('connexion')),
+                      ElevatedButton.icon(onPressed: (){
+                        if(globalKey.currentState!.validate()){
+                        login();
+                        }
+                        }, icon: Icon(Icons.login_sharp), label: Text('connexion')),
                       ElevatedButton.icon(onPressed: ()=>{
                         Navigator.push(context,MaterialPageRoute(builder: (context)=>RegistrationPage(),))
                       }, icon:const Icon(Icons.app_registration), label:const Text('Registration'))

@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  var name = 'border';
+  var name = 'Julian';
   List Array = ['jane', 'doe', 'LIL'];
   List<Map> users = [
     {'name': 'JSA', 'age': 23, 'value': true, 'size': 20.8},
@@ -19,11 +19,11 @@ class _HomePageState extends State<HomePage> {
     {'name': 'JSY', 'age': 29, 'value': false, 'size': 29.8}
   ];
   DateTime d = DateTime.now();
-  Widget build(BuildContext context) {
+  Widget  build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue,
-          title: Text('Home page'),
+          title:const Text('Home page'),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -37,29 +37,29 @@ class _HomePageState extends State<HomePage> {
                 width: 200,
                 child: GridView.builder(
                     itemCount: users.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2),
                     itemBuilder: ((context, index) =>
                         Text('${users[index]['name']}'))),
               ),
               Form(
                   child: Column(
-                children: [TextFormField( decoration: InputDecoration(hintText: 'enter your name',label: Text('your name'),border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20)))),
+                children: [TextFormField( decoration:const InputDecoration(hintText: 'enter your name',label: Text('your name'),border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20)))),
                 
                 )],
               )),
               TextButton(onPressed: () => {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage(),))
-              }, child: Text('click')),
-              IconButton(onPressed: () => {}, icon: Icon(Icons.window)),
+              }, child:const Text('click')),
+              IconButton(onPressed: () => {}, icon:const Icon(Icons.window)),
               TextButton.icon(
                   onPressed: () => {},
-                  icon: Icon(Icons.settings),
-                  label: Text('settings'))
+                  icon:const Icon(Icons.settings),
+                  label:const Text('settings'))
             ],
           ),
         ),
         floatingActionButton:
-            FloatingActionButton(onPressed: () => {}, child: Icon(Icons.add)));
+            FloatingActionButton(onPressed: () => {}, child:const Icon(Icons.add)));
   }
 }
